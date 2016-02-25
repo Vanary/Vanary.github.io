@@ -1,2 +1,2 @@
 # Vanary.github.io
-The great veture of Vanary
+The great venture of Vanary

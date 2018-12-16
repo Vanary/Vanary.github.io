@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>개발로그 - 181031</title>
+    <title>
+      개발로그 - 181213 - 아마존식 메가메뉴 개발 체험기 - Vanilla JS와 Canvas
+      API로
+    </title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link rel="stylesheet" href="../../css/devlog.css" />
   </head>
@@ -20,13 +23,22 @@
       const markdown = document.getElementById("markdown");
       const xhr = new XMLHttpRequest();
       xhr.addEventListener("load", reqListener);
-      xhr.open("GET", "./devlog181031.md");
+      xhr.open("GET", "./devlog181213.md");
       xhr.send();
       function reqListener(evt) {
         const res = evt.target;
         const html = marked(res.responseText);
         markdown.innerHTML = html;
+        const codes = document.querySelectorAll("#markdown code");
+        [...codes].forEach(el => el.classList.add("prettyprint"));
       }
     </script>
+    <!-- CodePen embed script -->
+    <script defer src="https://static.codepen.io/assets/embed/ei.js"></script>
+    <!-- Code Snippet styling -->
+    <script
+      defer
+      src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin"
+    ></script>
   </body>
 </html>

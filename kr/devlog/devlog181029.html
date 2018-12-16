@@ -1,73 +1,32 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>개발로그 - 181029</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-</head>
-<body>
-    <article id = 'markdown'>
-# 개발로그 181029
-
-## 오늘 배운 것 (1) - 웹과 네트워크 입문
-1. TCP/IP와 HTTP
-웹을 이루는 다양한 프로토콜이 있지만, 큰 줄기를 이루는 건 HTTP(클라이언트와 서버)와 TCP/IP(클라이언트와 서버 사이 네트워크)이다.
-클라이언트와 서버가 HTTP로 통신(리퀘스트/리스폰스)하고, 네트워크가 HTTP 헤더로 감싸인 메시지(엔티티)를 TCP와 IP 헤더로 감싸 서버까지 전달한다.
-
-### 함께 알아둘 것
-- URI: Uniform Resource Identifier - 콘텐츠를 식별하는 문자열
-- DNS: 호스트 URI를 통해 목적지 IP를 알려주는 서비스
-
-2. HTTP 연결 개요
-클라이언트가 HTTP 리퀘스트를 보내며 연결이 시작된다.
-리퀘스트는 리퀘스트 헤더 / 메시지 바디 (+ 인코딩된 엔티티 바디)로 구성되어 있으며, 리퀘스트 헤더에 처리하려는 내용을 메소드로 명시한다.
-주로 사용하는 메소드는 GET, POST, OPTIONS (+@ HEAD, PUT).
-
-서버가 모든 리퀘스트에 응답(리스폰스)하면 연결을 종료한다.
-리퀘스트 건별로 연결을 이었다 끊으면 서버 자원을 낭비하는 꼴이니, 특별한 이유가 없는 한 요청이 모두 끝날 때 까지 연결을 유지한다.
-연결을 유지하는 데엔 지속 연결(리스폰스 받으면 다시 리퀘스트 송신)과 파이프라인(리스폰스를 기다리지 않고 리퀘스트를 연이어 송신) 형태가 있다.
-
-리스폰스 또한 헤더/메시지로 구성되어 있다. 리스폰스 헤더에는 상태코드(그 유명한 404도)가 포함되어 있다.
-
-클라이언트와 최종 서버(오리진 서버) 사이에는 다양한 형태의 중간 서버들이 존재할 수 있다.
-- 프록시: HTTP 리퀘스트를 전달하거나 간단한 처리를 한다
-- 게이트웨이: 오리진 서버인 것 처럼 행동하나, 실제로는 오리진 서버에게 데이터를 받아 HTTP 리스폰스를 보낸다. 오리진 서버와 HTTP가 아닌 다른 프로토콜로 통신할 수도 있다. (교재에서는 SQL을 통해 데이터베이스에 접속하는 예시를 들었다.)
-- 터널: 클라이언트와 서버 사이의 통신을 안전하고 안정적으로 중개해주는 역할. 
-
-### 그 외 개념들
-- 쿠키: HTTP는 상태를 저정하지 않기 때문에, 다음 요청에 이전 상태를 확인하기 위해 클라이언트에 추가 정보를 저장하고, 재방문할 때 해당 정보를 헤더에 덧붙인다
-- 캐시: 클라이언트나 중간 서버에서 콘텐츠를 저장해두고 재사용할 수 있다.
-- 가상 호스트: 하나의 물리적 서버(=한 IP)에서 여러 
-
-HTTP 메시지 헤더에는 요청 상세를 표시하는 다양한 '헤더 필드'들이 존재한다.
-정해진 헤더 필드들(RFC를 통해)도 있지만, 클라이언트와 서버가 공유한다면 커스텀 헤더 필드도 쓸 수 있다.
-
-## 오늘 배운 것 (2) - 코드리뷰
-
-메서드 입출력이 분명하니 코드를 이해하고 유지보수하기 좋더라. (잘 했음!)
-
-
-클래스로 묶지 않고 개별 함수로만 프로그램을 짜니 좋기는 한데, 큰 흐름을 보기는 어렵더라.
-이 때 전반적인 동작을 묶어주는 추상화된 함수 하나가 있으면 전체 프로그램의 처리 흐름을 이해하기 좋을 것.
-
-
-## 오늘 배운 것 (3) - 알고리즘 / 다이나믹 프로그래밍
-
-- 한 일: 장애물이 있는 2차원 배열 안에서 가장 큰 정사각형 크기 찾기
-    * 접근법: O(N^3) 반복문 알고리즘을 구현해 답은 맞췄지만 효율성에서 탈락.
-    위 알고리즘을 O(N^2) 정도로 개선하기 위해 데이터 처리 흐름을 개선하고자 고민
-- 결과: 삽질. 방법을 찾을 수 없었다.
-- 대응: Stack Overflow와 YouTube 검색. 다이나믹 프로그래밍으로 해결할 수 있다는 조언을 얻음. 유레카!
-    * 다음엔 어떻게 할까?: 기존 알고리즘의 단점을 보고, 해당 단점을 해결하는 알려전 방법이 뭐가 있는지 생각했어야 함.
-    이번 사례는 한 요소를 반복문이 여러 번 탐색/사용하는 게 문제였다. 자연스럽게 동적계획법이 떠올랐다면 좋았을 것.
-    </article>
+    <link rel="stylesheet" href="../../css/devlog.css" />
+  </head>
+  <body>
+    <header>
+      <ul>
+        <li><a href="../../">처음 메뉴로</a></li>
+        <li><a href="./">개발로그 목록으로</a></li>
+      </ul>
+    </header>
+    <article id="markdown"></article>
     <script>
-        const markdown   = document.getElementById('markdown');
-        const text      = markdown.innerHTML;
-        const html      = marked(text);
+      const markdown = document.getElementById("markdown");
+      const xhr = new XMLHttpRequest();
+      xhr.addEventListener("load", reqListener);
+      xhr.open("GET", "./devlog181029.md");
+      xhr.send();
+      function reqListener(evt) {
+        const res = evt.target;
+        const html = marked(res.responseText);
         markdown.innerHTML = html;
+      }
     </script>
-</body>
+  </body>
 </html>

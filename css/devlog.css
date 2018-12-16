@@ -7,6 +7,10 @@ article {
   max-width: 1024px;
   margin: 0 auto;
 }
+article img {
+  display: block;
+  margin: 0 auto;
+}
 h1,
 h2,
 h3 {

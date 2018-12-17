@@ -22,9 +22,13 @@
     <script>
       const markdown = document.getElementById("markdown");
       const xhr = new XMLHttpRequest();
-      xhr.addEventListener("load", reqListener);
+      xhr.addEventListener("load", e => {
+        reqListener(e);
+        prettyfy();
+      });
       xhr.open("GET", "./devlog181213.md");
       xhr.send();
+
       function reqListener(evt) {
         const res = evt.target;
         const html = marked(res.responseText);
@@ -32,12 +36,16 @@
         const codes = document.querySelectorAll("#markdown code");
         [...codes].forEach(el => el.classList.add("prettyprint"));
       }
+
+      /* Code Snippet styling */
+      function prettyfy() {
+        const script = document.createElement("script");
+        script.src =
+          "https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=desert";
+        document.getElementsByTagName("head")[0].appendChild(script);
+      }
     </script>
-    <!-- Code Snippet styling -->
-    <script
-      defer
-      src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=desert"
-    ></script>
+
     <!-- CodePen embed script -->
     <script defer src="https://static.codepen.io/assets/embed/ei.js"></script>
   </body>

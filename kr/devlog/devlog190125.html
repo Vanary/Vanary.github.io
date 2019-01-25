@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      2019년 1월 25일 - TIL: This (Week) I Learned (코드스쿼드 19주차 회고)
+    </title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="../../css/devlog.css" />
+  </head>
+  <body>
+    <header>
+      <ul>
+        <li><a href="../../">처음 메뉴로</a></li>
+        <li><a href="./">개발로그 목록으로</a></li>
+      </ul>
+    </header>
+    <article id="markdown"></article>
+    <script>
+      const markdown = document.getElementById("markdown");
+      const xhr = new XMLHttpRequest();
+      xhr.addEventListener("load", e => {
+        reqListener(e);
+        prettyfy();
+      });
+      xhr.open("GET", "./devlog190125.md");
+      xhr.send();
+
+      function reqListener(evt) {
+        const res = evt.target;
+        const html = marked(res.responseText);
+        markdown.innerHTML = html;
+        const codes = document.querySelectorAll("#markdown code");
+        [...codes].forEach(el => el.classList.add("prettyprint"));
+      }
+
+      /* Code Snippet styling */
+      function prettyfy() {
+        const script = document.createElement("script");
+        script.src =
+          "https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=desert";
+        document.getElementsByTagName("head")[0].appendChild(script);
+      }
+    </script>
+
+    <!-- CodePen embed script -->
+    <script defer src="https://static.codepen.io/assets/embed/ei.js"></script>
+  </body>
+</html>

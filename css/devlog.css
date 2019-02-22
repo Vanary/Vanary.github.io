@@ -57,16 +57,20 @@ h3::before {
 
 /* Prettyfy skin - Desert - temporary fix */
 code {
+  color: white;
+  background-color: gray;
+  padding: 0 0.2rem;
+}
+
+pre code {
   display: block;
   padding: 30px;
   font-size: 16px;
 }
-code.prettyprint {
+pre code.prettyprint {
   display: block;
   background-color: #333;
   border-radius: 16px;
   white-space: pre-wrap;
   min-width: 640px;
-}
-code span {
 }
